@@ -1,0 +1,36 @@
+name: Build & Release to GitHub
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 配置 MSVC 编译器
+      - name: Initialize MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # 编译所有文件
+      - name: Compile Source.cpp & clHCA.cpp
+        run: cl /EHsc Source.cpp clHCA.cpp
+
+      # 上传 EXE 到 Artifacts
+      - name: Upload EXE
+        uses: actions/upload-artifact@v7
+        with:
+          name: Windows-EXE
+          path: Source.exe
+          if-no-files-found: error
+
+      # 自动创建 GitHub Release 并上传 EXE
+      - name: Create Release and Upload
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Source.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
