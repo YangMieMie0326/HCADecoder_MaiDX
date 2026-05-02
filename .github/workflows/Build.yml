@@ -1,4 +1,4 @@
-name: Build & Release to GitHub
+name: Windows C++ Build
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       # 编译所有文件
-      - name: Compile Source.cpp & clHCA.cpp
-        run: cl /EHsc Source.cpp clHCA.cpp
+      - name: Compile Main.cpp & clHCA.cpp
+        run: cl /EHsc Main.cpp clHCA.cpp
 
       # 上传 EXE 到 Artifacts
       - name: Upload EXE
