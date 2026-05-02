@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
 
 		// 解码
 		else {
-			printf("%s 解码...\n", argv[i]);
+			printf("%s 解码中...\n", argv[i]);
 			clHCA hca(ciphKey1, ciphKey2);
 			if (!hca.DecodeToWavefile(argv[i], filenameOut, volume, mode, loop)) {
 				printf("Error: 解码失败。\n");
