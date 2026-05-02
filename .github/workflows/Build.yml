@@ -17,7 +17,7 @@ jobs:
 
       # 编译所有文件
       - name: Compile Main.cpp & clHCA.cpp
-        run: cl /EHsc Main.cpp clHCA.cpp
+        run: cl /EHsc /utf-8 Main.cpp clHCA.cpp
 
       # 上传 EXE 到 Artifacts
       - name: Upload EXE
