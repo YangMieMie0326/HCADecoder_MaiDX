@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		// デコード
+		// 解码
 		else {
 			printf("%s 解码...\n", argv[i]);
 			clHCA hca(ciphKey1, ciphKey2);
