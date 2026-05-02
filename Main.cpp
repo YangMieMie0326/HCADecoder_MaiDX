@@ -69,8 +69,8 @@ int main(int argc, char *argv[]) {
 	char *filenameOut = NULL;
 	//bool decodeFlg=false;
 	float volume = 1;
-	unsigned int ciphKey1 = 0xE0748978; //秘钥A
-	unsigned int ciphKey2 = 0xCF222F1F; //秘钥B
+	unsigned int ciphKey1 = 0x9DF55E68; //秘钥A
+	unsigned int ciphKey2 = 0x7F455149; //秘钥B
 	int mode = 16;
 	int loop = 0;
 	bool info = false;
