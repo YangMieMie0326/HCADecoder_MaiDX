@@ -1,6 +1,6 @@
 
 //--------------------------------------------------
-// ƒCƒ“ƒNƒ‹[ƒh
+// å¤´æ–‡ä»¶
 //--------------------------------------------------
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -8,7 +8,7 @@
 #include "clHCA.h"
 
 //--------------------------------------------------
-// •¶š—ñ‚ğ10i”‚Æ‚İ‚È‚µ‚Ä”’l‚É•ÏŠ·(ŠÈˆÕ”Å)
+// å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•°å­—ï¼Œæ–¹æ³•æ˜¯å°†å…¶è§†ä¸ºåè¿›åˆ¶æ•°ï¼ˆç®€åŒ–ç‰ˆï¼‰
 //--------------------------------------------------
 int atoi(const char *s) {
 	int r = 0;
@@ -43,7 +43,7 @@ float atof(const char *s) {
 }
 
 //--------------------------------------------------
-// •¶š—ñ‚ğ16i”‚Æ‚İ‚È‚µ‚Ä”’l‚É•ÏŠ·
+// å°†å­—ç¬¦ä¸²è§†ä¸ºåå…­è¿›åˆ¶æ•°ï¼Œå¹¶å°†å…¶è½¬æ¢ä¸ºæ•°å­—ã€‚
 //--------------------------------------------------
 int atoi16(const char *s) {
 	int r = 0;
@@ -60,17 +60,17 @@ int atoi16(const char *s) {
 }
 
 //--------------------------------------------------
-// ƒƒCƒ“
+// ä¸»è¦
 //--------------------------------------------------
 int main(int argc, char *argv[]) {
 
-	// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‰ğÍ
+	// å‘½ä»¤è¡Œåˆ†æ
 	unsigned int count = 0;
 	char *filenameOut = NULL;
 	//bool decodeFlg=false;
 	float volume = 1;
-	unsigned int ciphKey1 = 0xE0748978;
-	unsigned int ciphKey2 = 0xCF222F1F;
+	unsigned int ciphKey1 = 0xE0748978; //ç§˜é’¥A
+	unsigned int ciphKey2 = 0xCF222F1F; //ç§˜é’¥B
 	int mode = 16;
 	int loop = 0;
 	bool info = false;
@@ -96,19 +96,19 @@ int main(int argc, char *argv[]) {
 
 	//if(decodeFlg){
 
-	// “ü—Íƒ`ƒFƒbƒN
+	// è¾“å…¥éªŒè¯
 	if (!count) {
-		printf("Error: “ü—Íƒtƒ@ƒCƒ‹‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B\n");
+		printf("Error: è¯·æŒ‡å®šè§£å¯†æ–‡ä»¶ã€‚\n");
 		return -1;
 	}
 
-	// ƒfƒR[ƒh
+	// è§£ç 
 	for (unsigned int i = 0; i<count; i++) {
 
-		// 2‚Â–ÚˆÈ~‚Ìƒtƒ@ƒCƒ‹‚ÍAo—Íƒtƒ@ƒCƒ‹–¼ƒIƒvƒVƒ‡ƒ“‚ª–³Œø
+		// ç¬¬äºŒä¸ªåŠåç»­æ–‡ä»¶çš„è¾“å‡ºæ–‡ä»¶åé€‰é¡¹å°†è¢«ç¦ç”¨ã€‚
 		if (i)filenameOut = NULL;
 
-		// ƒfƒtƒHƒ‹ƒgo—Íƒtƒ@ƒCƒ‹–¼
+		// é»˜è®¤è¾“å‡ºæ–‡ä»¶å
 		char path[MAX_PATH];
 		if (!(filenameOut&&filenameOut[0])) {
 			strcpy_s(path, sizeof(path), argv[i]);
@@ -120,29 +120,29 @@ int main(int argc, char *argv[]) {
 			filenameOut = path;
 		}
 
-		// ƒwƒbƒ_î•ñ‚Ì‚İ•\¦
+		// ä»…æ˜¾ç¤ºæ ‡é¢˜ä¿¡æ¯ã€‚
 		if (info) {
-			printf("%s ‚Ìƒwƒbƒ_î•ñ\n", argv[i]);
+			printf("%s æ ‡é¢˜ä¿¡æ¯\n", argv[i]);
 			clHCA hca(0, 0);
 			hca.PrintInfo(argv[i]);
 			printf("\n");
 		}
 
-		// •œ†‰»
+		// è§£å¯†
 		else if (decrypt) {
-			printf("%s ‚ğ•œ†‰»’†...\n", argv[i]);
+			printf("%s æ­£åœ¨è§£å¯†â€¦â€¦\n", argv[i]);
 			clHCA hca(ciphKey1, ciphKey2);
 			if (!hca.Decrypt(argv[i])) {
-				printf("Error: •œ†‰»‚É¸”s‚µ‚Ü‚µ‚½B\n");
+				printf("Error: è§£å¯†å¤±è´¥ã€‚\n");
 			}
 		}
 
-		// ƒfƒR[ƒh
+		// ãƒ‡ã‚³ãƒ¼ãƒ‰
 		else {
-			printf("%s ‚ğƒfƒR[ƒh’†...\n", argv[i]);
+			printf("%s è§£ç ...\n", argv[i]);
 			clHCA hca(ciphKey1, ciphKey2);
 			if (!hca.DecodeToWavefile(argv[i], filenameOut, volume, mode, loop)) {
-				printf("Error: ƒfƒR[ƒh‚É¸”s‚µ‚Ü‚µ‚½B\n");
+				printf("Error: è§£ç å¤±è´¥ã€‚\n");
 			}
 		}
 
